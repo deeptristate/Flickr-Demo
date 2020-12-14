@@ -11,11 +11,11 @@ import retrofit2.Response
 
 class ImageRepository(private val apiClient: APIClient) {
 
-    fun getImage(): LiveData<ImageResponse> {
+    fun getImage(query: HashMap<String, Any?>): LiveData<ImageResponse> {
 
         val data = MutableLiveData<ImageResponse>()
 
-        apiClient.getClient()?.getPhotos()?.enqueue(object : Callback<ImageResponse> {
+        apiClient.getClient()?.getPhotos(query)?.enqueue(object : Callback<ImageResponse> {
             override fun onResponse(call: Call<ImageResponse>, response: Response<ImageResponse>) {
                 data.value = response.body()
             }

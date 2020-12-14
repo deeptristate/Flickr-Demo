@@ -3,6 +3,7 @@ package com.flickrdemo.helper
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * common class for pagination listener.
@@ -25,6 +26,7 @@ abstract class PaginationScrollListener(private val layoutManager: RecyclerView.
             when (layoutManager) {
                 is LinearLayoutManager -> layoutManager.findFirstVisibleItemPosition()
                 is GridLayoutManager -> layoutManager.findFirstVisibleItemPosition()
+                is StaggeredGridLayoutManager -> layoutManager.findFirstVisibleItemPositions(IntArray(2))[0]
                 else -> null
             }
         if (!isLoading() && !isLastPage()) {
